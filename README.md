@@ -41,3 +41,11 @@ STEP 6
 start protractor test
 
 --> protractor config.js
+
+STEP 7
+.......
+
+run  protractor test on different environments
+
+--> protractor conf.js --parameters.url=urllink
+
