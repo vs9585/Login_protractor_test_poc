@@ -3,5 +3,8 @@ exports.config = {
   specs: ['spec.js'],
   onPrepare: function() {
     browser.manage().window().setSize(1600, 1000);
-  }
+  },
+   params: {
+      url: 'https://www.ratemyagent.com.au/'
+    }
 };
