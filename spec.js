@@ -1,9 +1,11 @@
  describe('Positive and Negative scenaiors for ratemyagent site', function() {
+  var url = browser.params.url
   it('should add a todo', function() {
     // var width = 1680;
     // var height = 1024;
     // browser.driver.manage().window().setSize(width, height);
-    browser.get('https://www.ratemyagent.com.au/');
+
+    browser.get(url);
     element(by.css('[ng-click="login()"]')).click();
     element(by.name('email')).sendKeys('vs9585@gmail.com');
     element(by.name('password')).sendKeys('Poonam1$');
@@ -22,7 +24,7 @@
   });
 it('invalid password', function() {
  
-    browser.get('https://www.ratemyagent.com.au/');
+    browser.get(url);
     element(by.css('[ng-click="login()"]')).click();
     element(by.name('email')).sendKeys('vs9585@gmail.com');
     element(by.name('password')).sendKeys('addaad');
@@ -33,7 +35,8 @@ it('invalid password', function() {
   });
   it('invalid email', function() {
  
-    browser.get('https://www.ratemyagent.com.au/');
+    var url = browser.params.url
+    browser.get(url);
     element(by.css('[ng-click="login()"]')).click();
     element(by.name('email')).sendKeys('v123@gmail.com');
     element(by.name('password')).sendKeys('addaad');
@@ -44,22 +47,22 @@ it('invalid password', function() {
   });
 it('Email and Password fields blank', function() {
  
-    browser.get('https://www.ratemyagent.com.au/');
+    browser.get(url);
     element(by.css('[ng-click="login()"]')).click();
     element(by.css('[ng-click="SubmitLogin()"]')).click();
     var errorMessage=element(by.css('[class="rmaHeaderShortlistCount__count ng-binding"]')).getText()
     expect(errorMessage).toEqual('The Email field is required.The Password field is required.')
   });
   it('valid Email and Password field blank', function() {
- 
-    browser.get('https://www.ratemyagent.com.au/');
+
+    browser.get(url);
     element(by.css('[ng-click="login()"]')).click();
     element(by.css('[ng-click="SubmitLogin()"]')).click();
     var errorMessage=element(by.css('[class="rmaHeaderShortlistCount__count ng-binding"]')).getText()
     expect(errorMessage).toEqual('The Password field is required.')
   });
   it('valid Password and email field blank', function() {
-    browser.get('https://www.ratemyagent.com.au/');
+    browser.get(url);
     element(by.css('[ng-click="login()"]')).click();
     element(by.css('[ng-click="SubmitLogin()"]')).click();
     var errorMessage=element(by.css('[class="rmaHeaderShortlistCount__count ng-binding"]')).getText()
