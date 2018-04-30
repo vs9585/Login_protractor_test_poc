@@ -1,4 +1,4 @@
- describe('angularjs homepage todo list', function() {
+ describe('Positive and Negative scenaiors for ratemyagent site', function() {
   it('should add a todo', function() {
     // var width = 1680;
     // var height = 1024;
@@ -20,4 +20,63 @@
     var removelist = element.all(by.css('[class="rmaIco ico-cross"]'));
     removelist.get(1).click();
   });
+it('invalid password', function() {
+ 
+    browser.get('https://www.ratemyagent.com.au/');
+    element(by.css('[ng-click="login()"]')).click();
+    element(by.name('email')).sendKeys('vs9585@gmail.com');
+    element(by.name('password')).sendKeys('addaad');
+    element(by.css('[ng-click="SubmitLogin()"]')).click();
+    var errorMessage=element(by.css('[class="rmaHeaderShortlistCount__count ng-binding"]')).getText()
+    expect(errorMessage).toEqual('Sorry, we couldn’t sign you in. You may not have an account with us yet or the details your provided may be incorrect.');
+    
+  });
+  it('invalid email', function() {
+ 
+    browser.get('https://www.ratemyagent.com.au/');
+    element(by.css('[ng-click="login()"]')).click();
+    element(by.name('email')).sendKeys('v123@gmail.com');
+    element(by.name('password')).sendKeys('addaad');
+    element(by.css('[ng-click="SubmitLogin()"]')).click();
+    var errorMessage=element(by.css('[class="rmaHeaderShortlistCount__count ng-binding"]')).getText()
+    expect(errorMessage).toEqual('Sorry, we couldn’t sign you in. You may not have an account with us yet or the details your provided may be incorrect.');
+    
+  });
+it('Email and Password fields blank', function() {
+ 
+    browser.get('https://www.ratemyagent.com.au/');
+    element(by.css('[ng-click="login()"]')).click();
+    element(by.css('[ng-click="SubmitLogin()"]')).click();
+    var errorMessage=element(by.css('[class="rmaHeaderShortlistCount__count ng-binding"]')).getText()
+    expect(errorMessage).toEqual('The Email field is required.The Password field is required.')
+  });
+  it('valid Email and Password field blank', function() {
+ 
+    browser.get('https://www.ratemyagent.com.au/');
+    element(by.css('[ng-click="login()"]')).click();
+    element(by.css('[ng-click="SubmitLogin()"]')).click();
+    var errorMessage=element(by.css('[class="rmaHeaderShortlistCount__count ng-binding"]')).getText()
+    expect(errorMessage).toEqual('The Password field is required.')
+  });
+  it('valid Password and email field blank', function() {
+    browser.get('https://www.ratemyagent.com.au/');
+    element(by.css('[ng-click="login()"]')).click();
+    element(by.css('[ng-click="SubmitLogin()"]')).click();
+    var errorMessage=element(by.css('[class="rmaHeaderShortlistCount__count ng-binding"]')).getText()
+    expect(errorMessage).toEqual('The Email field is required.')
+  });
+
+  it('Invalid location', function() {
+    element(by.css('[ng-click="login()"]')).click();
+    element(by.name('email')).sendKeys('vs9585@gmail.com');
+    element(by.name('password')).sendKeys('Poonam1$');
+    element(by.css('[ng-click="SubmitLogin()"]')).click();
+    browser.sleep(1000);
+    element(by.css('[ng-click="vm.openAutoSearch()"]')).click();
+    element(by.id('searchBox')).sendKeys('000000');
+    var noResult=element(by.css('[class="rmaAutoSearchResultSet__noResults ng-scope"]')).getText()
+    expect(errorMessage).toEqual('No Results')
+   
+  });
+
 });
